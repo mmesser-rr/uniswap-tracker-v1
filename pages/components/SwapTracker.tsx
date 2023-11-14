@@ -1,8 +1,14 @@
+import { useNetwork } from "wagmi";
 import useSwaps from "../../src/hooks/useSwaps";
 import MintNFT from "./MintNFT";
 
 export default function SwapTracker() {
+  const { chain } = useNetwork();
   const { isLoading, data } = useSwaps();
+
+  if (!!chain?.unsupported) {
+    return <></>
+  }
 
   return (
     <div style={{ marginTop: "36px" }}>
